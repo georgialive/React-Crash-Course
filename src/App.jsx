@@ -1,21 +1,61 @@
 import "./App.css";
-import './components/Styles.css'
-import Todo from './components/Todo'
-import Title from './components/Title'
-import Modal from './components/Modal.jsx'
-import Counter from './components/Counter'
-import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Home from './pages/Home.jsx'
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Nav from "./components/Nav";
+import Users from "./pages/Users";
+
+
+// import './components/Styles.css'
+// import Todo from './components/Todo'
+// import Title from './components/Title'
+// import Modal from './components/Modal.jsx'
+// import Counter from './components/Counter'
+// import React, { useState, useEffect } from 'react';
 
 function App() {
 
-
-  return <Counter />
-
-  const [showModal, setShowModal] = useState(false);
- 
   return (
-    <div>
-        {/* React Crash Course
+      <Router>
+        <Nav></Nav>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/users/:id" element={<Users />}></Route>
+        </Routes>
+      </Router>
+  );
+}
+
+export default App;
+
+// const [showModal, setShowModal] = useState(false);
+
+  // function onTodoDelete() {
+  //   setShowModal(true)
+  // }
+
+  // function cancelModal() {
+  //   setShowModal(false)
+  // }
+
+  // function confirmModal() {
+  //   setShowModal (false)
+  // }
+
+  // useEffect(() => {
+  //   console.log('ONLY on mount')
+  // }, [])
+
+  // useEffect(() => {
+  //   console.log(`on mount And on ${showModal} change`)
+  // }, [showModal])
+
+  // useEffect(() => {
+  //   console.log('EVERY render')
+  // })
+
+{/* React Crash Course
 
         INTRODUCTION
         
@@ -29,10 +69,7 @@ function App() {
         -Most popular frontend Framework
         -Contantly being Updated by Faceboo */}
 
-
-
-
-        {/* 
+      {/* 
         
         
         REUSABLE COMPONEMTS
@@ -57,7 +94,7 @@ function App() {
         
         */}
 
-        {/* 
+      {/* 
         
         
         PROPS
@@ -119,7 +156,7 @@ function App() {
 
         */}
 
-        {/* 
+      {/* 
         
       
         
@@ -160,55 +197,112 @@ function App() {
 
         1. Create a "Counter.jsx" component
         2. Create a default `count` of 0
-        3. Create a hotton to increment `count` by 1
+        3. Create a botton to increment `count` by 1
         4. Create a button to decrement `count` by 1
         4. Import your Counter in App.jsk and test it.
-        
-        */}
-        <Counter />
 
-        <Title />
-        <div>
-          <input type="text" onChange={(event) => {
-            console.log(event.target.value)
-          }}/>
-          <button onClick={() => setShowModal(true)}>Add Todo</button>
-        </div>
-          <div className="todo__wrapper">
-            <Todo 
-              title="Finish Frontend Simplified"
-            />
-            <Todo 
-              title="Finish the Top Tech Roadmap"
-            />
-            <Todo 
-              title="Finish the Mid Level Roadmap"
-            />
-            <Todo 
-              title="Land a $150,000+ Job" 
-            />
-            <Todo 
-              title="Complete the Certificate"
-            />
-            <Todo 
-              title="Apply to Jobs"
-            />
-            <Todo 
-              title="Finish Virtual Internship"
-            />
-            <Todo 
-              title="Finish the Interviews"
-            />
-            <Todo 
-              title="Finish the Coding Roadmap"
-            />
-          </div>
-          {showModal && <Modal title="Are you sure you want to delete this element?"/>}
-          {/* <Modal 
+        Callbacks:
+
+          Numbers:
+          -setNum(10)
+          -setNum(prevNum => prevNum + 10)
+
+          Booleans
+          -setBool(true)
+          -setBool(prevBool => !prevBool)
+          
+          Strings
+          - setStr('Frontend')
+          - setStr(prevStr => prevStr + 'Simplified')
+
+          Objects
+            - setObj(newObject)
+            - setObj(prevObj => ({...prevObj, quantitiy: prevObj.quantity + 1}))
+
+          Arrays
+            - setArr(newArr)
+            - setArr(prevArr => ([...prevArr, 5]))
+        
+        Emitting Events:
+
+                Pass props
+              -------------->
+        Parent                Child
+              <--------------
+                Emit Events
+
+        Parent:
+
+        function Parent() {
+          function clicked() {
+            console.log('Parent notified!')
+          }
+
+          return (
+            <Child clicked={clicked} />
+          );       _________________
+                      pass props
+
+        }
+
+        function Child({ clicked }) {
+
+          return (
+            <button onClick={clicked}>Child Button</button>
+          )         -----------------
+                       Emit Events
+
+        }
+
+        ROUTING:
+
+        What is routing in React? 
+        - Routing lets you navigate around your website.
+        
+        API INTEGRATION:
+
+        How do you retrieve data from an API in React?
+        - fetch
+        - axios
+
+
+        */}
+
+      {/* <Title />
+      <div>
+        <input
+          type="text"
+          onChange={(event) => {
+            console.log(event.target.value);
+          }}
+        />
+        <button onClick={() => setShowModal(true)}>Add Todo</button>
+      </div>
+      <div className="todo__wrapper">
+        <Todo onTodoDelete={onTodoDelete} title="Finish Frontend Simplified" />
+        <Todo onTodoDelete={onTodoDelete} title="Finish the Top Tech Roadmap" />
+        <Todo
+          onTodoDelete={onTodoDelete}
+          title="Finish the Mid Level Roadmap"
+        />
+        <Todo onTodoDelete={onTodoDelete} title="Land a $150,000+ Job" />
+        <Todo onTodoDelete={onTodoDelete} title="Complete the Certificate" />
+        <Todo onTodoDelete={onTodoDelete} title="Apply to Jobs" />
+        <Todo onTodoDelete={onTodoDelete} title="Finish Virtual Internship" />
+        <Todo onTodoDelete={onTodoDelete} title="Finish the Interviews" />
+        <Todo onTodoDelete={onTodoDelete} title="Finish the Coding Roadmap" />
+      </div>
+      {showModal && (
+        <Modal
+          cancelModal={cancelModal}
+          confirmModal={confirmModal}
+          title="Are you sure you want to delete this element?"
+        /> */}
+      {/* <Modal 
             title="Are you sure you want to add?"
           /> */}
-        
-        {/* <div>
+
+      {/* <div>
           <h2>Finish Top Tech Roadmap</h2>
           <button>Delete</button>
         </div>
@@ -232,12 +326,6 @@ function App() {
           <h2>Finish Coding Roadmap</h2>
           <button>Delete</button>
         </div> */}
-    </div>
 
+ 
 
-
-
-  );
-}
-
-export default App;

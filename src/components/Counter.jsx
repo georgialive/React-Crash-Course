@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 function Counter() {
 
-
-
   const [cart, setCart] = useState({ 
     item: " Apple", 
     quantity: 0,
@@ -19,8 +17,6 @@ function Counter() {
   //1. Use a callback to get the previous value
   //2. Spread out all the properties of the previous state
   //3. Only change the properties that you need to change
-
-  // TIME: 1:05:24
 
   function subtractApple() {
     setCart(prevCart => ({
@@ -41,7 +37,7 @@ function Counter() {
   //   setCounter((prevCounter) => prevCounter - 1);
   // }
 
-  //TIME 1:07:18
+
   return (
     <>
       <button onClick={subtractApple}>-</button>
